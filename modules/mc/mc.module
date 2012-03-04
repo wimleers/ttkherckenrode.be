@@ -1,0 +1,41 @@
+<?php
+
+//----------------------------------------------------------------------------
+// Drupal core hooks.
+
+/**
+ * Implements hook_menu().
+ */
+function mc_menu() {
+  $items['mc'] = array(
+    'title'           => 'Manager Competitie',
+    'description'     => 'Manager Competitie ranking',
+    'page callback'   => 'mc_ranking',
+    'access callback' => TRUE,
+    'file'            => 'mc.pages.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function mc_block_info() {
+  $blocks = array();
+
+  // TODO
+
+  return $blocks;
+}
+
+
+//----------------------------------------------------------------------------
+// Public API.
+
+/**
+ * Get the last week for which information si available.
+ */
+function mc_get_last_week() {
+  return db_query("SELECT MAX(week) FROM {mc_ranking}")->fetchField();
+}

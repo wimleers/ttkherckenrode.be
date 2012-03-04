@@ -1,0 +1,63 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ */
+function mc_schema() {
+  // We really only use three types, so alias these.
+  $id     = array('type' => 'serial', 'size' => 'normal', 'unsigned' => TRUE, 'not null' => TRUE);
+  $number = array('type' => 'int', 'size' => 'normal', 'unsigned' => TRUE, 'not null' => TRUE);
+  $text   = array('type' => 'varchar', 'length' => 255);
+
+  $schema['mc_players'] = array(
+    'fields' => array(
+      'id'     => $id,
+      'nr'     => $number,
+      'naam'   => $text,
+      'klass'  => $text,
+      'waarde' => $number,
+      'extra'  => $text,
+      'x'      => $text,
+      'y'      => $text,
+    ),
+    'primary key' => array('id'),
+  );
+  $schema['mc_ranking'] = array(
+    'fields' => array(
+      'id'            => $id,
+      'week'          => $number,
+      'rank'          => $number,
+      'previous_rank' => $number,
+      'name'          => $text,
+      'manager'       => $text,
+      'points'        => $number,
+      'movement'      => $number,
+    ),
+    'primary key' => array('id'),
+  );
+  $schema['mc_teams'] = array(
+    'fields' => array(
+      'id'     => $id,
+      'name'   => $text,
+      'userid' => $number,
+      'een'    => $number,
+      'twee'   => $number,
+      'drie'   => $number,
+      'vier'   => $number,
+      'vijf'   => $number,
+    ),
+    'primary key' => array('id'),
+  );
+  $schema['mc_weekwinnaars'] = array(
+    'fields' => array(
+      'id'      => $id,
+      'week'    => $number,
+      'name'    => $text,
+      'manager' => $text,
+      'points'  => $number,
+    ),
+    'primary key' => array('id'),
+  );
+
+  return $schema;
+}
